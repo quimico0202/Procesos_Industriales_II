@@ -1,0 +1,44 @@
+%Estimación del volumen de un CSTR en función de la conversión
+%Ecuación de Diseño de un CSTR: 
+%................................  V = (Fao/-ra)*Xa
+%Datos de Inicio
+
+% a) Calcular la Cao considerando la Ley de GI
+R=0.082;
+Po=10;
+Yao=0.5;
+To=422.2;
+Cao=(Yao*Po)/(R*To);
+
+% b) Estimar el flujo molar Fao
+Vo=6;
+Fao=Cao*Vo;
+
+%Datos de velocidad de reaccion en términos de la conversión
+Xa=[0:0.1:0.8,0.85];
+ra=[0.0053 0.0052 0.0050 0.0045 0.0040 0.0033 0.0025 0.0018 0.00125 0.001];%El vector es -ra
+v1=[1 1 1 1 1 1 1 1 1 1];
+invra=v1./ra;
+
+%Calculo del Volumen del reactor en funcion de la conversión y la vel. de reaccion
+
+V=Fao*(invra.*Xa);
+
+%Gráficar Xa vs -rad
+subplot(2,2,1);
+plot(Xa,ra,'-og','Linewidth',2,'Markersize',3);
+title('Velocidad de rxn vs Conversion');
+xlabel('Conversion,Xa','Fontsize',14)
+ylabel('Vel. de rxn,-ra','Fontsize',14)
+%Gráficar Xa vs 1/-ra
+subplot(2,2,2);
+plot(Xa,invra,'-.+b','Linewidth',2,'Markersize',3);
+title('Inverso de la Velocidad de rxn vs Conversion');
+xlabel('Conversion,Xa','Fontsize',14)
+ylabel('Inv. Vel. rxn,1/-ra','Fontsize',14)
+%Gráficar Vcstr vs Xa
+subplot(2,2,3);
+plot(Xa,V,'--*r','Linewidth',2,'Markersize',3);
+title('Volumen del Reactor CSTR vs Conversion');
+xlabel('Conversion,Xa','Fontsize',14)
+ylabel('Vol. CSTR','Fontsize',14)
