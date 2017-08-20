@@ -1,0 +1,5 @@
+%Cuadratura de Simpson: 5 puntos
+
+function [int]=cincopuntos(fx1,fx2,fx3,fx4,fx5,a,b,m)% el valor de m=4
+  h=(b-a)/m;
+int=h/3*(fx1+4*fx2+2*fx3+4*fx4+fx5);
